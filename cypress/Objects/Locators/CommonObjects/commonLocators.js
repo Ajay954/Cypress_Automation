@@ -3,9 +3,13 @@ export const commonLocators = {
     passwordGetPath: '[name="password"]',
     loginButtonGetPath: '.oxd-button',
     header6:'h6',
+    Text:'p',
     LoginFailureAlert:'.oxd-alert',
     ForgotPasswordGetPath:'.orangehrm-login-forgot',
     ForgotPasswordCancelGetPath:'.oxd-button--ghost',
     usernameEmptyXpath:'//*[@name="username"]/parent::div/following-sibling::span',
-    passwordEmptyXpath:'//*[@name="password"]/parent::div/following-sibling::span'
+    passwordEmptyXpath:'//*[@name="password"]/parent::div/following-sibling::span',
+    ForgotPasswordPageHeaderGetPath: '.oxd-text--h5',
+    ResetPasswordGetPath: ".oxd-button--secondary",
+    EmailOnForgotPasswordGetPath: ".oxd-input",
 }

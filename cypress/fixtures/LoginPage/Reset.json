@@ -4,5 +4,6 @@
     "Text2":"A reset password link has been sent to you via email.",
     "Text3":"You can follow that link and select a new password.",
     "Note":"Note:",
-    "NoteText":"If the email does not arrive, please contact"
+    "NoteText":"If the email does not arrive, please contact",
+    "Email":"Abcdefghij123456789"
 }

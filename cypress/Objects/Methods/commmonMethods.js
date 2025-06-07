@@ -11,5 +11,8 @@ class Actions{
     verifyTextByXPath(path,text){
         cy.xpath(path).should("have.text",text);
     }
+    verifyIncludedTextByGetPath(path,text){
+        cy.get(path).should("include.text",text);
+    }
 }
 export const CommonObjects = new Actions();
