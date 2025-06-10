@@ -1,3 +1,4 @@
+import {commonLocators as locator} from "../Locators/CommonObjects/commonLocators"
 class Actions{
     sendValueByGetPath(path, value){
         cy.get(path).clear().type(value);
@@ -13,6 +14,11 @@ class Actions{
     }
     verifyIncludedTextByGetPath(path,text){
         cy.get(path).should("include.text",text);
+    }
+    LoginToThePage(){
+        cy.get(locator.usernameGetPath).type(Cypress.env("USERNAME"))
+        cy.get(locator.passwordGetPath).type(Cypress.env("PASSWORD"))
+        cy.get(locator.loginButtonGetPath).click()
     }
 }
 export const CommonObjects = new Actions();

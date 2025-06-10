@@ -18,9 +18,7 @@ import './commands'
 import 'cypress-xpath'
 // import { commonLocators } from "../Objects/Locators/CommonObjects/commonLocators"
 import { CommonObjects} from "../Objects/Methods/commmonMethods"
-import {Login} from "../Objects/Methods/Login"
 
-Cypress.login = Login;
 Cypress.Actions = CommonObjects;
 // Cypress.locate = commonLocators;
 // Alternatively you can use CommonJS syntax:
