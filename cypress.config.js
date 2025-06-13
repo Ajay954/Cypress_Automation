@@ -11,19 +11,13 @@ module.exports = defineConfig({
     
     e2e: {
         baseUrl: 'https://opensource-demo.orangehrmlive.com/',
-        specPattern: 'cypress/e2e',
+        specPattern: 'cypress/e2e/spec.cy.js',
         // screenshotOnRunFailure: true,
-        video: false,
+        video: true,
         // screenshotsFolder: 'cypress/screenshots',
-        // videoCompression: false,
+        videoCompression: 32,
         // viewportWidth: 1000,
         // viewportHeight: 540,
-        // experimentalModifyObstructiveThirdPartyCode: true,
-        // experimentalRunAllSpecs: true,
-        // setupNodeEvents(on, config) {
-        //     allureWriter(on, config);
-        //     return config;
-        // }
     },
 
     env: {

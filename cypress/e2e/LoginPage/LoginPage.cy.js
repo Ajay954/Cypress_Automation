@@ -1,5 +1,5 @@
 
-import { commonLocators as loginLocater } from "../../Objects/Locators/CommonObjects/commonLocators"
+import { commonLocators as loginLocator } from "../../Objects/Locators/commonLocators"
 // import { CommonObjects as action} from "../../Objects/Methods/commmonMethods"
 // import {Login as loginBypass} from "../../Objects/Methods/Login"
 
@@ -7,7 +7,6 @@ describe('Login Verification and Validation', () => {
   let loginCredentials
   let Reset
   before(function(){
-    // cy.clearAllCookies()
     cy.fixture('LoginPage/Login').then((data) => {
       loginCredentials = data;
     })
@@ -19,96 +18,59 @@ describe('Login Verification and Validation', () => {
     cy.visit("/")
   })
   after(function(){
-    cy.getCookies().then((cookies) => {
-      cookies.forEach((cookie) => {
-        cy.log(`${cookie.name}: ${cookie.value}`);
-      });
-    });
     cy.clearAllCookies();
-    cy.getCookies().then((cookies) => {
-      cookies.forEach((cookie) => {
-        cy.log(`${cookie.name}: ${cookie.value}`);
-      });
-    });
   })
   it('Enter Valid Credentials for Login and Verify Login Success', function() {
     cy.viewport(1000,600);
-    Cypress.Actions.sendValueByGetPath(loginLocater.usernameGetPath,Cypress.env("USERNAME"))
-    Cypress.Actions.sendValueByGetPath(loginLocater.passwordGetPath,Cypress.env("PASSWORD"))
-    Cypress.Actions.clickObjectByGetPath(loginLocater.loginButtonGetPath)
-    Cypress.Actions.verifyTextByGetPath(loginLocater.header6 , loginCredentials.headerAfterLogin)
+    cy.TypeValue(loginLocator.loginUsername,Cypress.env("USERNAME"))
+    cy.TypeValue(loginLocator.loginPassword,Cypress.env("PASSWORD"))
+    cy.Click(loginLocator.loginButton)
+    cy.VerifyHaveText(loginLocator.header6 , loginCredentials.headerAfterLogin)
   })
   it('Enter Wrong Credentials for Login and Verify Message', function() {
-    cy.get(loginLocater.usernameGetPath).debug()
-    Cypress.Actions.sendValueByGetPath(loginLocater.usernameGetPath,Cypress.env("USERNAME"))
-    Cypress.Actions.sendValueByGetPath(loginLocater.passwordGetPath,Cypress.env("USERNAME"))
-    Cypress.Actions.clickObjectByGetPath(loginLocater.loginButtonGetPath)
-    Cypress.Actions.verifyTextByGetPath(loginLocater.LoginFailureAlert , loginCredentials.Invalid_Message)
+    // cy.get(loginLocator.username).debug()
+    cy.TypeValue(loginLocator.loginUsername,Cypress.env("USERNAME"))
+    cy.TypeValue(loginLocator.loginPassword,Cypress.env("USERNAME"))
+    cy.Click(loginLocator.loginButton)
+    cy.VerifyContainsText(loginLocator.LoginFailureAlert , loginCredentials.Invalid_Message)
   })
   it('Verify Error Message When Empty Login Credentials',function(){
-    Cypress.Actions.clickObjectByGetPath(loginLocater.loginButtonGetPath)
-    Cypress.Actions.verifyTextByXPath(loginLocater.usernameEmptyXpath,loginCredentials.Required)
-    Cypress.Actions.verifyTextByXPath(loginLocater.passwordEmptyXpath,loginCredentials.Required)
+    cy.Click(loginLocator.loginButton)
+    cy.VerifyHaveText(loginLocator.usernameRequired,loginCredentials.Required)
+    cy.VerifyHaveText(loginLocator.passwordRequired,loginCredentials.Required)
   })
   it('Perform Forgot Password and Cancel', function() {
-    Cypress.Actions.clickObjectByGetPath(loginLocater.ForgotPasswordGetPath)
-    Cypress.Actions.verifyTextByGetPath(loginLocater.header6 , Reset.Reset_Password)
-    Cypress.Actions.clickObjectByGetPath(loginLocater.ForgotPasswordCancelGetPath)
-    Cypress.Actions.verifyTextByGetPath(loginLocater.ForgotPasswordPageHeaderGetPath,loginCredentials.Login);
+    cy.Click(loginLocator.ForgotPassword)
+    cy.VerifyHaveText(loginLocator.header6 , Reset.Reset_Password)
+    cy.Click(loginLocator.ForgotPasswordCancel)
+    cy.VerifyHaveText(loginLocator.ForgotPasswordPageHeader,loginCredentials.Login);
   })
   it('Reset Password with Empty Field, Verify Error Message', function(){
     //Click on forget password
-    Cypress.Actions.clickObjectByGetPath(loginLocater.ForgotPasswordGetPath)
+    cy.Click(loginLocator.ForgotPassword)
     //Clicks on reset Password
-    Cypress.Actions.clickObjectByGetPath(loginLocater.ResetPasswordGetPath)
+    cy.Click(loginLocator.ResetPassword)
     //Verify error message for dynamic locator when displayed
-    cy.get(loginLocater.usernameGetPath).parent().next().should('have.text','Required').and('be.visible')
+    cy.get(loginLocator.loginUsername).parent().next().should('have.text',loginCredentials.Required).and('be.visible')
     //Click on cancel button
-    Cypress.Actions.clickObjectByGetPath(loginLocater.ForgotPasswordCancelGetPath);
+    cy.Click(loginLocator.ForgotPasswordCancel);
   })
 
   it('Perform Reset Password',function(){
     //Click on forget password
-    Cypress.Actions.clickObjectByGetPath(loginLocater.ForgotPasswordGetPath)
+    cy.Click(loginLocator.ForgotPassword)
     //Enter Username to Reset Password
-    Cypress.Actions.sendValueByGetPath(loginLocater.EmailOnForgotPasswordGetPath,Reset.Email)
+    cy.TypeValue(loginLocator.EmailOnForgotPassword,Reset.Email)
     //Clicks on reset Password
-    Cypress.Actions.clickObjectByGetPath(loginLocater.ResetPasswordGetPath)
+    cy.Click(loginLocator.ResetPassword)
     //Verify Displayed message
-    Cypress.Actions.verifyTextByGetPath(loginLocater.header6, Reset.Text1)
-    Cypress.Actions.verifyIncludedTextByGetPath(loginLocater.Text, Reset.Text2)
-    Cypress.Actions.verifyIncludedTextByGetPath(loginLocater.Text, Reset.Text3)
-    Cypress.Actions.verifyIncludedTextByGetPath(loginLocater.Text, Reset.Note)
-    Cypress.Actions.verifyIncludedTextByGetPath(loginLocater.Text, Reset.NoteText)
+    cy.VerifyHaveText(loginLocator.header6, Reset.Text1)
+    cy.VerifyContainsText(loginLocator.Text, Reset.Text2)
+    cy.VerifyContainsText(loginLocator.Text, Reset.Text3)
+    cy.VerifyContainsText(loginLocator.Text, Reset.Note)
+    cy.VerifyContainsText(loginLocator.Text, Reset.NoteText)
     cy.go(-2)
+    // cy.Login()
   })
-  
-  // it.only('Checking', function(){
-
-  //   cy.get('.oxd-text--h5').then(($el) =>{
-  //     // let myText = $el.text();
-  //     cy.log('Capture Text : '+$el.text())
-  //   });
-
-  //   Cypress.login.LoginToThePage()
-  //   cy.get('ul.oxd-main-menu > li').then(($el) => {
-  //     let allTexts = [...$el].map(el => el.innerText);
-  //     cy.log('All LI texts:', allTexts[0]);
-  //     allTexts.forEach((value, text) => {
-  //       cy.log("Item "+ (value) + " : " + text);
-  //     });
-  //   })
-  // })
 
 })
-
-//              Verification	                                        Validation
-// Definition	  Are we building the product right?	                  Are we building the right product?
-// Purpose	    Ensures the product meets the design/specs	          Ensures the product meets the user needs
-// Focus	      Internal consistency, completeness, and correctness	  Real-world functionality and usability
-// When	        During development (before execution)	                After development (during/after execution)
-// Type	        Static testing	                                      Dynamic testing
-// Examples	    - Reviews                                             - Functional Testing
-//              - Inspections                                         - User Acceptance Testing
-//              - Walkthroughs	                                              
-// Who performs	Developers, QA	                                      QA, testers, end-users

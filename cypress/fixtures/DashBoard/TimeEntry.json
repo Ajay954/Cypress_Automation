@@ -1,0 +1,25 @@
+{
+    
+    "AttendanceText":"Attendance",
+    "PunchText":"Punch",
+    "PunchIn":"Punch In",
+    "PunchOut":"Punch Out",
+    "SelectPunchInOutFromListOfOption":"1",
+    "SelectMyRecordsFromListOfOption":"0",
+    "Time":{
+        "H":"06",
+        "M":"00",
+        "AM":"AM",
+        "PM":"PM",
+        "Total":"12h"
+    },
+    "ProvideAlias":{
+        "Start":"WeekBegin",
+        "End":"WeekEnd"
+    },
+    "RetrieveFromAlias":{
+        "Start":"@WeekBegin",
+        "End":"@WeekEnd"
+    }
+    
+}

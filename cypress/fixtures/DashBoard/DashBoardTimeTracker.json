@@ -1,0 +1,9 @@
+{
+    "Dashboard":"Dashboard",
+    "DashboardSection1":"Time at Work",
+    "PunchedOut":"Punched Out",
+    "Today":"Today",
+    "HourTextH":"h", 
+    "MinuteTextM":"m",
+    "ThisWeekText":"This Week"
+}

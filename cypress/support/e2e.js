@@ -17,9 +17,9 @@
 import './commands'
 import 'cypress-xpath'
 // import { commonLocators } from "../Objects/Locators/CommonObjects/commonLocators"
-import { CommonObjects} from "../Objects/Methods/commmonMethods"
+// import { CommonObjects} from "../Objects/Methods/commmonMethods"
 
-Cypress.Actions = CommonObjects;
+// Cypress.Actions = CommonObjects;
 // Cypress.locate = commonLocators;
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
